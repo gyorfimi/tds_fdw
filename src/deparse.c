@@ -1657,9 +1657,9 @@ deparseFuncExpr(FuncExpr *node, deparse_expr_cxt *context)
 
 		/* Get the typmod if this is a length-coercion function */
 		(void) exprIsLengthCoercion((Node *) node, &coercedTypmod);
-
+		appendStringInfo(buf, "CAST(");
 		deparseExpr((Expr *) linitial(node->args), context);
-		appendStringInfo(buf, " as %s",
+		appendStringInfo(buf, " as %s)",
 						 deparse_type_name(rettype, coercedTypmod));
 		return;
 	}
